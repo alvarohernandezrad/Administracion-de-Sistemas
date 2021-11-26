@@ -1,19 +1,13 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: cliente-deployment
+  name: cliente-job
   labels:
     app: cliente
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: cliente
   template:
-    metadata:
-      labels:
-        app: cliente
     spec:
+      restartPolicy: Never
       containers:
         - name: cliente
           image: ahernandez141/cliente_proyecto_kubernetes
@@ -30,3 +24,4 @@ spec:
                   key: KEY
             - name: MYSQL_SERVICE_HOST
               value: mariadb-service
+          
